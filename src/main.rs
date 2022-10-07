@@ -1,6 +1,13 @@
-use rand::Rng; // trait类似接口
+// singly put above the unused struct and so on
+#![allow(dead_code)]
+// singly put above the unused variable
+#![allow(unused_variables)]
+use core::panic;
+use rand::Rng;
+// trait类似接口
 use std::cmp::Ordering;
-use std::io;
+use std::fs::File;
+use std::io::{self, ErrorKind, Read};
 // use std::collections::*;
 // use std::collections::{HashMap, HashSet};
 // use std::f32::consts::E;
@@ -23,6 +30,7 @@ fn main() {
     // first_introduction();
     // second_basis();
     // third_more();
+    err_handle();
 }
 
 fn first_introduction() {
@@ -34,7 +42,7 @@ fn first_introduction() {
         let mut guess = String::new();
         io::stdin().read_line(&mut guess).expect("无法读取行"); // io::Result Ok,Err
         print!("你猜测的数是：{}", guess); // guess里已经包含回车  了
-                                           // let guess: u32 = guess.trim().parse().expect("转换失败");
+        // let guess: u32 = guess.trim().parse().expect("转换失败");
         let guess: u32 = match guess.trim().parse() {
             Ok(num) => num,
             Err(_) => {
@@ -60,8 +68,8 @@ fn second_basis() {
     println!("{}, {}, {}, ", tup.0, tup.1, tup.2);
     println!("{}, {}, {}, ", x, y, z);
     println!("{}", b'8'); // 这个的类型是u8
-                          // println!("{}",b"8"); // 这个的类型是[u8;1    ]
-                          // 数组（存放在栈上而不是堆上）
+    // println!("{}",b"8"); // 这个的类型是[u8;1    ]
+    // 数组（存放在栈上而不是堆上）
     let _a = [1, 2, 3, 4, 5];
     let _a: [u32; 5] = [1, 2, 3, 4, 5];
     let a = [3; 5];
@@ -97,3 +105,67 @@ fn third_more() {
         None => println!("There is no third element"),
     }
 }
+
+fn err_handle() {
+    // errs that are unrecyclable
+    // panic!("crash and burn");
+
+    // errs that can be handled
+    // enum Result<T,E>{
+    //     Ok(T),
+    //     Err(E),
+    // }
+    let f = File::open("hello.txt");
+    let f = match f {
+        Ok(file) => file,
+        Err(error) => match error.kind() {
+            io::ErrorKind::NotFound => match File::create("hello.txt") {
+                Ok(fc) => fc,
+                Err(e) => panic!("Error opening file {:?}", error),
+            },
+            other => panic!("Error opening file {:?}", error),
+        },
+    };
+
+    // enum.unwarp: if the enum is Ok, return the value, accordingly when the enum is Err, return the error
+    // enum.expect: personalize the error message
+    // let f = File::open("hello.txt").unwrap_or_else(|error| {
+    //     if error.kind() == ErrorKind::NotFound {
+    //         File::create("hello.txt").unwrap_or_else(|error| {
+    //             panic!("Error creating file: {:?}", error);
+    //         })
+    //     } else {
+    //         panic!("Error opening file: {:?}", error);
+    //     }
+    // });
+}
+
+// fn read_username_from_file() -> Result<String, io::Error> {
+//     let f = File::open("hello.txt");
+//     let mut f = match f {
+//         Ok(file) => file,
+//         Err(e) => return Err(e),
+//     };
+//     let mut s = String::new();
+//     // return the match expression
+//     match f.read_to_string(&mut s) {
+//         Ok(_) => Ok(s),
+//         Err(e) => Err(e),
+//     }
+// }
+
+fn read_username_from_file() -> Result<String, io::Error> {
+    let mut s = String::new();
+    let mut f = File::open("hello.txt")?; // Ok returns the value for the expression, Err return the value for whole function
+    // the error employed by `?` will be implicitly addressed by the from function(Trait std::convert::From)
+    // if want to transform EA into EB, the EA must accomplish the trait `from` which return the EB
+    f.read_to_string(&mut s)?;
+    // one sentence to implement the two sentences's effects
+    // File::open("files.txt")?.read_to_string(&mut s)?;
+    Ok(s)
+}
+
+// some knowledge difficult to understand for now
+// fn main() -> Result<(), Box<dyn io::Error>> {
+//     let f = File::open("hello.txt")?;
+// }
