@@ -1,8 +1,10 @@
 use rand::Rng; // trait类似接口
 use std::cmp::Ordering;
-use std::collections::*;
-use std::collections::{HashMap, HashSet};
-use std::io::{self, Write}; // prelude预导入，不需要导入 // 主要作用就是测试时和预导入模块
+use std::io;
+// use std::collections::*;
+// use std::collections::{HashMap, HashSet};
+// use std::f32::consts::E;
+// use std::io::{self, Write}; // prelude预导入，不需要导入 // 主要作用就是测试时和预导入模块
 
 // 定义常量
 // const MAX_POINTS: u32 k= 100_000;
@@ -35,7 +37,10 @@ fn first_introduction() {
         // let guess: u32 = guess.trim().parse().expect("转换失败");
         let guess: u32 = match guess.trim().parse() {
             Ok(num) => num,
-            Err(_) => continue,
+            Err(_) => {
+                println!("你的输入有误，请重新输入\n");
+                continue;
+            }
         };
         match guess.cmp(&secret_number) {
             Ordering::Less => println!("Too Small"),
@@ -55,7 +60,7 @@ fn second_basis() {
     println!("{}, {}, {}, ", tup.0, tup.1, tup.2);
     println!("{}, {}, {}, ", x, y, z);
     println!("{}", b'8'); // 这个的类型是u8
-    // println!("{}",b"8"); // 这个的类型是[u8;1 ]
+    // println!("{}",b"8"); // 这个的类型是[u8;1    ]
     // 数组（存放在栈上而不是堆上）
     let _a = [1, 2, 3, 4, 5];
     let _a: [u32; 5] = [1, 2, 3, 4, 5];
@@ -83,12 +88,12 @@ fn second_basis() {
 }
 
 fn third_more() {
-    let v: Vec<i32> = Vec::new();
+    // let v: Vec<i32> = Vec::new();
     let mut v = vec![1, 2, 3];
     v.push(110);
     println!("The third element is {}", &v[2]);
     match v.get(2) {
-        Some(third) => println!("The third element is {}", &v[2]),
+        Some(third) => println!("The third element is {}", third),
         None => println!("There is no third element"),
     }
 }
