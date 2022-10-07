@@ -20,9 +20,9 @@ impl Rectangle {
     }
 }
 fn main() {
-    first_introduction();
-    second_basis();
-    third_more();
+    // first_introduction();
+    // second_basis();
+    // third_more();
 }
 
 fn first_introduction() {
@@ -34,7 +34,7 @@ fn first_introduction() {
         let mut guess = String::new();
         io::stdin().read_line(&mut guess).expect("无法读取行"); // io::Result Ok,Err
         print!("你猜测的数是：{}", guess); // guess里已经包含回车  了
-        // let guess: u32 = guess.trim().parse().expect("转换失败");
+                                           // let guess: u32 = guess.trim().parse().expect("转换失败");
         let guess: u32 = match guess.trim().parse() {
             Ok(num) => num,
             Err(_) => {
@@ -60,8 +60,8 @@ fn second_basis() {
     println!("{}, {}, {}, ", tup.0, tup.1, tup.2);
     println!("{}, {}, {}, ", x, y, z);
     println!("{}", b'8'); // 这个的类型是u8
-    // println!("{}",b"8"); // 这个的类型是[u8;1    ]
-    // 数组（存放在栈上而不是堆上）
+                          // println!("{}",b"8"); // 这个的类型是[u8;1    ]
+                          // 数组（存放在栈上而不是堆上）
     let _a = [1, 2, 3, 4, 5];
     let _a: [u32; 5] = [1, 2, 3, 4, 5];
     let a = [3; 5];
