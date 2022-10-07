@@ -33,6 +33,7 @@ fn main() {
     // second_basis();
     // third_more();
     // err_handle();
+    test_binary_crate::main();
 }
 
 fn first_introduction() {
