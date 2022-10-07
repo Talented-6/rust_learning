@@ -13,6 +13,8 @@ use std::io::{self, ErrorKind, Read};
 // use std::f32::consts::E;
 // use std::io::{self, Write}; // prelude预导入，不需要导入 // 主要作用就是测试时和预导入模块
 
+mod test_binary_crate;
+
 // 定义常量
 // const MAX_POINTS: u32 k= 100_000;
 
@@ -30,7 +32,7 @@ fn main() {
     // first_introduction();
     // second_basis();
     // third_more();
-    err_handle();
+    // err_handle();
 }
 
 fn first_introduction() {
