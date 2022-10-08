@@ -11,4 +11,4 @@ rand = "0.8.5"
 # profile of release
 [profile.release]
 # when panic happened, the program will abort instead of unwinding and clearing.
-panic='abort'
+panic = 'abort'

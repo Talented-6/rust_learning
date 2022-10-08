@@ -2,6 +2,9 @@
 #![allow(dead_code)]
 // singly put above the unused variable
 #![allow(unused_variables)]
+// allow unused_imports
+#![allow(unused_imports)]
+
 use core::panic;
 use rand::Rng;
 // trait类似接口
@@ -12,8 +15,6 @@ use std::io::{self, ErrorKind, Read};
 // use std::collections::{HashMap, HashSet};
 // use std::f32::consts::E;
 // use std::io::{self, Write}; // prelude预导入，不需要导入 // 主要作用就是测试时和预导入模块
-
-mod test_binary_crate;
 
 // 定义常量
 // const MAX_POINTS: u32 k= 100_000;
@@ -33,7 +34,6 @@ fn main() {
     // second_basis();
     // third_more();
     // err_handle();
-    test_binary_crate::main();
 }
 
 fn first_introduction() {
