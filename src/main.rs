@@ -7,6 +7,7 @@
 
 use core::panic;
 use rand::Rng;
+use std::net::IpAddr;
 // trait类似接口
 use std::cmp::Ordering;
 use std::fs::File;
@@ -71,7 +72,7 @@ fn second_basis() {
     println!("{}, {}, {}, ", tup.0, tup.1, tup.2);
     println!("{}, {}, {}, ", x, y, z);
     println!("{}", b'8'); // 这个的类型是u8
-    // println!("{}",b"8"); // 这个的类型是[u8;1    ]
+    // println!("{}",b"8"); // 这个的类型是[u8;1]
     // 数组（存放在栈上而不是堆上）
     let _a = [1, 2, 3, 4, 5];
     let _a: [u32; 5] = [1, 2, 3, 4, 5];
@@ -141,6 +142,7 @@ fn err_handle() {
     //         panic!("Error opening file: {:?}", error);
     //     }
     // });
+    let localhost: IpAddr = "127.0.0.1".parse().unwrap();
 }
 
 // fn read_username_from_file() -> Result<String, io::Error> {
