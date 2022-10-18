@@ -1,0 +1,1 @@
+C:\Users\Administrator\CLionProjects\rust_learning\target\release\rust_learning.exe: C:\Users\Administrator\CLionProjects\rust_learning\src\lib.rs C:\Users\Administrator\CLionProjects\rust_learning\src\main.rs
