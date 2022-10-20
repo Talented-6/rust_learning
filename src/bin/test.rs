@@ -65,5 +65,5 @@ fn main() {
     println!("And 'Adrian Fahrenheit Țepeș' is {:?} bytes. It is not Sized.", std::mem::size_of_val("Adrian Fahrenheit Țepeș"));
 
     // into
-    let test: String = "test".into();
+    // let test: String = "test".into();
 }
